@@ -1,14 +1,24 @@
 import React,{useState} from 'react'
 import "./Header.css"
-import { Link} from 'react-router-dom';
+import { Link,useLocation,useNavigate} from 'react-router-dom';
+
 
 export const Header = () => {
+    const location = useLocation()
+    const navigate = useNavigate();
+
     const[isDarkMode,setIsDarkMode]=useState(true)
+
+    const isLandingPage = location.pathname === '/';
+    const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
 
     const toggleMode = () => {
         setIsDarkMode(!isDarkMode);
         document.body.classList.toggle('light-mode');
       };
+    const handleUserClick =()=>{
+        navigate('/login');
+    }
 
   return (
     <header className={`App-header ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
@@ -27,10 +37,15 @@ export const Header = () => {
 
         </div>
         <div className="header-controls">
-            <button className="user-button" >User</button>
+        {isLandingPage && !isAuthPage&& (<button className="user-button" onClick={handleUserClick}>User</button>)}
+            
             <div className="auth-buttons">
-            {/* <button className="login-button">Login</button> */}
-            {/* <button className="signup-button"> Sign Up</button> */}
+            {!isLandingPage && isAuthPage&& (
+                <div className="auth-buttons">
+                    <button className="login-button" onClick={() => navigate('/login')}>Login</button>
+                    <button className="signup-button" onClick={() => navigate('/signup')}> Sign Up</button>
+                </div>
+            )}
             {/* <div to="/" className="nav-link">Home</div> */}
             {/* <button className="user-icon-button">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
