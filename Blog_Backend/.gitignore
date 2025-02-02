@@ -1,2 +1,4 @@
 fast_venv/
 .env
+venv/
+__pycache__/

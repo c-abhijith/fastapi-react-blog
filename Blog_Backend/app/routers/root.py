@@ -1,13 +1,13 @@
-from fastapi import FastAPI
-from app.database import engine, Base
-from app.config import get_settings
 from fastapi import APIRouter
+from app.config import get_settings
 
-app = FastAPI()
+root = APIRouter(
+    prefix='',
+    tags=['landing_page']
+)
 settings = get_settings()
-Base.metadata.create_all(bind=engine)
 
-@app.get("/")
+@root.get("/")
 def read_root():
     return {
         "message": "Welcome to the EchoBlog",
@@ -15,8 +15,3 @@ def read_root():
         "version": settings.APP_VERSION,
         "debug": settings.DEBUG
     }
-
-if __name__=='__main__':
-    import uvicorn
-    uvicorn.run()
-    

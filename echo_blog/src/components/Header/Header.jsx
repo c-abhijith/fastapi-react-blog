@@ -28,7 +28,7 @@ export const Header = () => {
                     <span className={`echo-text ${isDarkMode ? 'dark' : 'light'}`}>
                     Echo
                     </span>
-                    <span className="blog-text">blog</span>
+                    <span className="blog-text">Blog</span>
                 </Link>
             </div>
             {/* <nav className="nav-links">
