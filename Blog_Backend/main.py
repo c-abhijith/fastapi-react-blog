@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from app.database import engine, Base
 from app.config import get_settings
-from fastapi import APIRouter
 
 app = FastAPI()
 settings = get_settings()
